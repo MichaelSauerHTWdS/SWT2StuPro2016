@@ -27,6 +27,9 @@ public class SeeRoute {
 		this.stadt_1 = stadt_1;
 		this.stadt_2 = stadt_2;
 
+		stadt_1.SeeRouten.add(this);
+		stadt_2.SeeRouten.add(this);
+
 		for (int i = 0; i < laenge; i++) {
 			route.add(new Wasser(i));
 		}
@@ -103,6 +106,12 @@ public class SeeRoute {
 				route.get(w.positon + 1).schiffe.add(s);
 				s.move(this.route.get(w.positon + 1));
 			}
+		}
+	}
+
+	public void resetMoveAll() {
+		for (Wasser w : this.route) {
+			w.resetMove();
 		}
 	}
 

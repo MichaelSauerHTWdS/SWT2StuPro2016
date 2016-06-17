@@ -1,9 +1,12 @@
 package schiff;
 
+import java.util.ArrayList;
+
 import gueter.Gut;
 import gueter.Lager;
 import objekt.GeoObjekt;
 import objekt.Stadt;
+import player.Player;
 
 /**
  * 
@@ -16,6 +19,8 @@ public class Schiff {
 
 	private int schadenspunkte;
 	private int MAXSCHADENSPUNKT;
+
+	private Player owner;
 
 	private Stadt target;
 
@@ -30,13 +35,15 @@ public class Schiff {
 	private SchiffsTyp schiffsTyp;
 	public Lager lager;
 
+	public ArrayList<String> eventLog;
+
 	/**
 	 * 
 	 * @param name
 	 * @param position
 	 * @param schadenspunkte
 	 */
-	public Schiff(String name, GeoObjekt position, SchiffsTyp schiffsTyp) {
+	public Schiff(String name, GeoObjekt position, SchiffsTyp schiffsTyp, Player owner) {
 		this.position = position;
 		this.name = name;
 		this.lager = new Lager(schiffsTyp.lagerKap);
@@ -44,6 +51,10 @@ public class Schiff {
 		this.schadenspunkte = 100;
 		this.MAXSCHADENSPUNKT = this.schadenspunkte;
 		this.schiffsTyp = schiffsTyp;
+		this.owner = owner;
+		
+		this.position.schiffe.add(this);
+		this.eventLog = new ArrayList<String>();
 	}
 
 	/**
@@ -63,7 +74,7 @@ public class Schiff {
 	 * @param dmg
 	 * @return
 	 */
-	public int dmgSchiff(int dmg) {
+	private int dmgSchiff(int dmg) {
 
 		this.schadenspunkte -= dmg;
 
@@ -72,6 +83,12 @@ public class Schiff {
 		}
 
 		return this.schadenspunkte;
+	}
+
+	public void dmgSchiffBegruendet(int dmg, String grund) {
+
+		this.eventLog.add(grund + " - " + dmg + " -> " + this.dmgSchiff(dmg));
+
 	}
 
 	/**
@@ -151,6 +168,10 @@ public class Schiff {
 
 	public SchiffsTyp getSchiffsTyp() {
 		return this.schiffsTyp;
+	}
+
+	public Player getOwner() {
+		return this.owner;
 	}
 
 	public void setTarget(Stadt target) {

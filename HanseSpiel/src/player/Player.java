@@ -14,7 +14,7 @@ import schiff.SchiffsTyp;
 public class Player {
 
 	String name;
-	ArrayList<Schiff> schiffe;
+	public ArrayList<Schiff> schiffe;
 	Konto konto;
 
 	public Player(String name, int kapital) {
@@ -24,7 +24,21 @@ public class Player {
 	}
 
 	void buyShip(Stadt stadt, SchiffsTyp typ) {
+		if (konto.auszahlung(typ.getKaufpreis()) < 0) {
+			// TODO Nicht genug Geld
+		} else {
+			Schiff schiff = new Schiff("", stadt, typ, this);
+			stadt.schiffe.add(schiff);
+			this.schiffe.add(schiff);
+		}
+	}
 
+	public String getName() {
+		return this.name;
+	}
+
+	public int getKontostand() {
+		return this.konto.kontostand;
 	}
 
 }

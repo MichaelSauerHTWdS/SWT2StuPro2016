@@ -3,10 +3,11 @@ package run;
 import java.util.Scanner;
 
 import gueter.Gut;
-import objekt.SeeRoute;
-import objekt.Stadt;
+import player.Player;
 import schiff.Schiff;
 import schiff.SchiffsTyp;
+import tui.Manager;
+import tui.Menues;
 
 /**
  * 
@@ -17,56 +18,40 @@ public class Run {
 
 	public static void main(String[] args) {
 
-		Stadt stadt_1 = new Stadt("Berlin");
-		Stadt stadt_2 = new Stadt("Waron");
+		Manager manager = new Manager();
+		Menues menues = new Menues(manager);
 
-		Schiff schiff_1 = new Schiff("VonBerlin", stadt_1, SchiffsTyp.Kogge);
-		Schiff schiff_2 = new Schiff("VonWaron", stadt_2, SchiffsTyp.Linienschiff);
+		Player player_1 = new Player("Oli", 1000);
+
+		Schiff schiff_1 = new Schiff("Koeln 1", manager.getCityByName("Koeln"), SchiffsTyp.Kogge, player_1);
+		Schiff schiff_2 = new Schiff("Koeln 2", manager.getCityByName("Koeln"), SchiffsTyp.Linienschiff, player_1);
+
+		player_1.schiffe.add(schiff_1);
+		player_1.schiffe.add(schiff_2);
 
 		schiff_1.beladen(Gut.Bier, 50);
 		schiff_1.beladen(Gut.Kupfer, 20);
 		schiff_1.beladen(Gut.Kupfer, 20);
 		schiff_1.beladen(Gut.Pelze, 10);
 
-		SeeRoute BerlinNachWaron = new SeeRoute(stadt_1, stadt_2, 10);
+		// System.out.println(manager.toString());
 
-		stadt_1.schiffe.add(schiff_1);
-		stadt_2.schiffe.add(schiff_2);
+		manager.addAShipToRoute("Novgorod", schiff_1);
+		manager.addAShipToRoute("Visby", schiff_2);
 
-		System.out.println(BerlinNachWaron.toString());
-
-		BerlinNachWaron.addShipToRoute(schiff_1, stadt_1);
-		BerlinNachWaron.addShipToRoute(schiff_2, stadt_2);
-
-		System.out.println(BerlinNachWaron.toString());
-
-		Scanner leser = new Scanner(System.in);
 		boolean next = true;
 		while (next == true) {
 
-			BerlinNachWaron.intialEvents();
-			BerlinNachWaron.executEvents();
+			manager.intialEvents();
+			manager.executeEvents();
 
-			schiff_1.resetMove();
-			schiff_2.resetMove();
+			manager.moveAll();
 
-			BerlinNachWaron.moveShips();
+			menues.showWorldMenue(player_1);
 
-			System.out.println(BerlinNachWaron.toString());
-
-			System.out.println("Weiter??(j/n)");
-
-			String tmp = leser.nextLine();
-			if (tmp.equals("n")) {
-				next = false;
-			}
 		}
 
 		// schiff_1.lager.entladen(Gut.Bier, 60);
-
-		System.out.println(BerlinNachWaron.toString());
-
-		leser.close();
 
 	}
 

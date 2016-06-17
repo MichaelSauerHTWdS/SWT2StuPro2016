@@ -55,7 +55,26 @@ public enum SchiffsTyp {
 			break;
 		}
 		return newSchiffsTyp;
+	}
 
+	public int getKaufpreis() {
+		return kaufpreis;
+	}
+
+	public int getUpgrade() {
+		return upgrade;
+	}
+
+	public int getReperatur() {
+		return reperatur;
+	}
+
+	public int getGebuehr() {
+		return gebuehr;
+	}
+
+	public int getLagerKap() {
+		return lagerKap;
 	}
 
 }

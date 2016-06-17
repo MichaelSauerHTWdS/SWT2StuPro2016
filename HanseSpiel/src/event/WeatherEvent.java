@@ -1,7 +1,5 @@
 package event;
 
-import java.util.Random;
-
 import schiff.Schiff;
 
 /**
@@ -11,7 +9,6 @@ import schiff.Schiff;
  */
 public class WeatherEvent extends Event {
 
-	String name;
 	WeatherTyp wetterTyp;
 
 	private enum WeatherTyp {
@@ -79,7 +76,7 @@ public class WeatherEvent extends Event {
 	@Override
 	public void executeEvent(Schiff schiff) {
 
-		schiff.dmgSchiff(this.wetterTyp.getDmg());
+		schiff.dmgSchiffBegruendet(this.wetterTyp.getDmg(), this.wetterTyp.name());
 
 	}
 

@@ -21,6 +21,7 @@ public class PiratEvent extends Event {
 	public void executeEvent(Schiff schiff) {
 		if (activ) {
 			schiff.lager.clearLager();
+			schiff.eventLog.add("Von Piraten überfallen! - Alle Güter wurden Gestohlen");
 		}
 	}
 
@@ -35,13 +36,13 @@ public class PiratEvent extends Event {
 		}
 
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		String tmp = "";
-		if(this.activ){
+		if (this.activ) {
 			tmp = "Pirat";
 		}
-		
+
 		return tmp;
 	}
 

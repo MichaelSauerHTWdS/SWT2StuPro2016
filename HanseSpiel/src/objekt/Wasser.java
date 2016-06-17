@@ -1,7 +1,5 @@
 package objekt;
 
-import java.util.ArrayList;
-
 import event.PiratEvent;
 import event.WeatherEvent;
 import schiff.Schiff;
@@ -11,14 +9,12 @@ import schiff.Schiff;
  * @author davidbaldauf (ki.dbaldauf@htwsaar.de)
  *
  */
-public class Wasser implements GeoObjekt {
+public class Wasser extends GeoObjekt {
 
 	int positon;
 
 	WeatherEvent weather;
 	PiratEvent pirat;
-
-	ArrayList<Schiff> schiffe = new ArrayList<Schiff>();
 
 	public Wasser(int position) {
 		this.positon = position;
@@ -27,7 +23,7 @@ public class Wasser implements GeoObjekt {
 	}
 
 	public void executeEvents() {
-		for (Schiff s : this.schiffe) {
+		for (Schiff s : schiffe) {
 			weather.executeEvent(s);
 			pirat.executeEvent(s);
 		}
@@ -38,11 +34,17 @@ public class Wasser implements GeoObjekt {
 		pirat.intialEvent();
 	}
 
+	public void resetMove() {
+		for (Schiff s : this.schiffe) {
+			s.resetMove();
+		}
+	}
+
 	@Override
 	public String toString() {
 		String tmp = "----  " + this.positon + " -  " + weather.toString() + " - " + pirat.toString() + "--\n";
 		int i = 0;
-		for (Schiff s : this.schiffe) {
+		for (Schiff s : schiffe) {
 			tmp += i++ + " - " + s.toString() + "\n";
 		}
 		return tmp;
