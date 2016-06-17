@@ -1,4 +1,4 @@
-Version 0.02
+#Version 0.02
 Autoren:	- David : ki.dbaldauf@htwsaar.de
 			-
 					
