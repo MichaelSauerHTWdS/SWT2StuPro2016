@@ -22,6 +22,7 @@ Das ist die Erste Grundlags Version des Spiels(Das selbst noch nicht da ist).
 		+ Schiff können anlegen/ablegen
 		+ TODO 
 			# Kontoren
+			# Lokale Güter
 		
 	- Spieler
 		+ TODO
