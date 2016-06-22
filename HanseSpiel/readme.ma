@@ -1,4 +1,4 @@
-#Version 0.02
+#Version 0.03
 Autoren:	- David : ki.dbaldauf@htwsaar.de
 			-
 					
@@ -33,15 +33,23 @@ Das ist die Erste Grundlags Version des Spiels(Das selbst noch nicht da ist).
 			# mehr funktionalität
 	- Gut
 	
+	- TODO Erfolge
+	
 	- TUI (Text)
 		+ ErsterPrototyp
 		+ Weltkart
 		+ Stadt
-			# TODO Hafen (reparieren, bauen/kaufen , entsenden von Schiffen)
+			# Hafen 
+				* Entsenden
+				* Reparieren
+				* TODO
+					- Aufrüsten
+					- Ent-/Beladen
 			# TODO Kontor (ver-/kauf von Gütern)
 		
 			
 Starten:
     java -jar HanseSpiel.jar
 
-Das ist ein erstes Testprogram
+Bekannte Fehler:
+	- Eingabe von falschen Zeichen führen zu einer Exception die zu einem Programmabruch führt.

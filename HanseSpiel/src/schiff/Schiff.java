@@ -52,7 +52,7 @@ public class Schiff {
 		this.MAXSCHADENSPUNKT = this.schadenspunkte;
 		this.schiffsTyp = schiffsTyp;
 		this.owner = owner;
-		
+
 		this.position.schiffe.add(this);
 		this.eventLog = new ArrayList<String>();
 	}
@@ -184,5 +184,17 @@ public class Schiff {
 
 	public void entladen(Gut gut, int request) {
 		this.lager.entladen(gut, request);
+	}
+
+	public int getSchadenpunkte() {
+		return this.schadenspunkte;
+	}
+
+	public int getRepaturkosten() {
+		int kosten = 0;
+
+		kosten = (this.MAXSCHADENSPUNKT - this.schadenspunkte) * this.schiffsTyp.reperatur;
+
+		return kosten;
 	}
 }

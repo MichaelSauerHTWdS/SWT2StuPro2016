@@ -41,4 +41,18 @@ public class Player {
 		return this.konto.kontostand;
 	}
 
+	public int bezahlen(int kosten) {
+		return this.konto.auszahlung(kosten);
+	}
+
+	@Override
+	public boolean equals(Object anObject) {
+		if (anObject instanceof Player) {
+			if (this.name.equals(((Player) anObject).name)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

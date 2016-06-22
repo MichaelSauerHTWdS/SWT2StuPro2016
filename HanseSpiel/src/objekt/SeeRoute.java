@@ -137,6 +137,7 @@ public class SeeRoute {
 		s.inSeeStechen(this.route.get(position), this.laenge);
 	}
 
+	@Override
 	public String toString() {
 		String tmp = "--- Route from " + this.stadt_1.getName() + " to " + this.stadt_2.getName() + "---\n";
 		tmp += this.stadt_1.toString();
@@ -147,6 +148,10 @@ public class SeeRoute {
 
 		tmp += this.stadt_2.toString();
 		return tmp;
+	}
+
+	public int getLaenge() {
+		return this.laenge;
 	}
 
 }
