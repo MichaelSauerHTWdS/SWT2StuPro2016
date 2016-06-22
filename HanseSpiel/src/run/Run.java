@@ -1,7 +1,5 @@
 package run;
 
-import java.util.Scanner;
-
 import gueter.Gut;
 import player.Player;
 import schiff.Schiff;
