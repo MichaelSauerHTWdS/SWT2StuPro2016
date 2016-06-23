@@ -62,6 +62,7 @@ Das ist die Erste Grundlags Version des Spiels(Das selbst noch nicht da ist).
 				* TODO
 					- Aufrüsten
 					- Ent-/Beladen
+					- Ver-/Kauf von Schiffen 
 			# TODO Kontor (ver-/kauf von Gütern)
 			
 	- GUI (Graphische)
@@ -73,3 +74,4 @@ Starten:
 
 Bekannte Fehler:
 	- Eingabe von falschen Zeichen führen zu einer Exception die zu einem Programmabruch führt. (TODO)
+	- 
