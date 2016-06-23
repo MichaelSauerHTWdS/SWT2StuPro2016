@@ -7,11 +7,19 @@ import objekt.Stadt;
 import player.Player;
 import schiff.Schiff;
 
+/**
+ * 
+ * @author davidbaldauf (ki.dbaldauf@htwsaar.de)
+ *
+ */
 public class Manager {
 
-	ArrayList<Player> players;
-	ArrayList<SeeRoute> seeRouten;
+	public ArrayList<Player> players;
+	public ArrayList<SeeRoute> seeRouten;
 	public ArrayList<Stadt> staedte;
+
+	int startGuthaben = 100000;
+	int startSchiffe = 2;
 
 	public Manager() {
 		players = new ArrayList<Player>();
@@ -28,13 +36,13 @@ public class Manager {
 
 		for (int i = 0; i < namen.length; i++) {
 			staedte.add(new Stadt(namen[i]));
-			System.out.println(i + " -  " + namen[i]);
+			// System.out.println(i + " - " + namen[i]);
 		}
 	}
 
 	public Stadt getCityByName(String name) {
 
-		System.out.println("Input :  " + name);
+		// System.out.println("Input : " + name);
 
 		for (Stadt s : this.staedte) {
 
@@ -47,7 +55,7 @@ public class Manager {
 		return null;
 	}
 
-	public void addAShipToRoute(String ZStadt,Schiff s) {
+	public void addAShipToRoute(String ZStadt, Schiff s) {
 		Stadt sSt = (Stadt) s.getPosition();
 		sSt.getASeeRouteByStadt(ZStadt).addShipToRoute(s, sSt);
 	}
@@ -118,6 +126,18 @@ public class Manager {
 		}
 	}
 
+	public void searchForDeadShips() {
+
+		for (Player p : this.players) {
+			for (Schiff s : p.schiffe) {
+				if (s.getSchadenpunkte() < 0) {
+					s.eventLog.add("Schiff ist versunken im Meer!!");
+					s.setDead();
+				}
+			}
+		}
+	}
+
 	public String toString() {
 		String tmp = "";
 
@@ -126,6 +146,13 @@ public class Manager {
 		}
 
 		return tmp;
+	}
+
+	public void setStartGuthaben(int startGuthaben) {
+		this.startGuthaben = startGuthaben;
+		for (Player p : this.players) {
+			p.setGuthaben(startGuthaben);
+		}
 	}
 
 }

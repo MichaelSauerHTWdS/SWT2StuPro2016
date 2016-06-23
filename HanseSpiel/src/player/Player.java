@@ -45,6 +45,10 @@ public class Player {
 		return this.konto.auszahlung(kosten);
 	}
 
+	public void setGuthaben(int guthaben) {
+		this.konto.kontostand = guthaben;
+	}
+
 	@Override
 	public boolean equals(Object anObject) {
 		if (anObject instanceof Player) {

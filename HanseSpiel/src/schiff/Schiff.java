@@ -27,6 +27,8 @@ public class Schiff {
 	private GeoObjekt position;
 	private int travelTime;
 
+	private boolean dead;
+
 	/**
 	 * Ob das schiff diese runde schon dran war
 	 */
@@ -52,6 +54,8 @@ public class Schiff {
 		this.MAXSCHADENSPUNKT = this.schadenspunkte;
 		this.schiffsTyp = schiffsTyp;
 		this.owner = owner;
+
+		this.owner.schiffe.add(this);
 
 		this.position.schiffe.add(this);
 		this.eventLog = new ArrayList<String>();
@@ -196,5 +200,20 @@ public class Schiff {
 		kosten = (this.MAXSCHADENSPUNKT - this.schadenspunkte) * this.schiffsTyp.reperatur;
 
 		return kosten;
+	}
+
+	public boolean getDead() {
+		return dead;
+	}
+
+	public void setDead() {
+		dead = true;
+	}
+
+	public void removeShip() {
+		if (dead) {
+			this.owner.schiffe.remove(this);
+			this.position.schiffe.remove(this);
+		}
 	}
 }
