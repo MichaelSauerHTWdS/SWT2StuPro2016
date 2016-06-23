@@ -4,7 +4,7 @@ import schiff.Schiff;
 
 /**
  * 
- * @author davidbaldauf (ki.dbaldauf@htwsaar.de)
+ * @author davidbaldauf (ki.david.baldauf@htw-saarland.de)
  *
  */
 public class WeatherEvent extends Event {

@@ -10,7 +10,7 @@ import schiff.SchiffsTyp;
 
 /**
  * 
- * @author davidbaldauf (ki.dbaldauf@htwsaar.de)
+ * @author davidbaldauf (ki.david.baldauf@htw-saarland.de)
  *
  */
 public class Menues {
