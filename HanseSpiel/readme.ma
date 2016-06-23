@@ -1,5 +1,5 @@
 #Version 0.04
-Autoren:	- David : ki.dbaldauf@htwsaar.de
+Autoren:	- David : ki.david.baldauf@htw-saarland.de
 			-
 					
 Das ist die Erste Grundlags Version des Spiels(Das selbst noch nicht da ist).
