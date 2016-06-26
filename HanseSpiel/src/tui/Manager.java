@@ -2,8 +2,10 @@ package tui;
 
 import java.util.ArrayList;
 
+import gueter.Gut;
 import objekt.SeeRoute;
 import objekt.Stadt;
+import player.Kontor;
 import player.Player;
 import schiff.Schiff;
 
@@ -33,10 +35,13 @@ public class Manager {
 
 	void buildCity() {
 		String[] namen = { "Koeln", "Bruegge", "Hamburg", "Luebeck", "Visby", "Novgorod", "Bergen", "London" };
+		Gut[] reginonalGueter = { Gut.Wein, Gut.Tuch, Gut.Bier, Gut.Salz, Gut.Kupfer, Gut.Pelze, Gut.Stockfisch,
+				Gut.Zinn };
 
 		for (int i = 0; i < namen.length; i++) {
-			staedte.add(new Stadt(namen[i]));
-			// System.out.println(i + " - " + namen[i]);
+			System.out.println(i + " - " + namen[i] + " + " + reginonalGueter[i]);
+			staedte.add(new Stadt(namen[i], reginonalGueter[i]));
+
 		}
 	}
 
@@ -103,6 +108,14 @@ public class Manager {
 
 		stadt = this.getCityByName("Bergen");
 		this.seeRouten.add(new SeeRoute(stadt, this.getCityByName("London"), 6));
+	}
+
+	public void createKontors() {
+		for (Player p : this.players) {
+			for (Stadt s : this.staedte) {
+				Kontor.createKontor(p, s);
+			}
+		}
 	}
 
 	public void intialEvents() {

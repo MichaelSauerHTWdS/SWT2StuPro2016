@@ -11,15 +11,17 @@ public enum Gut {
 			10), Tuch("Tuch", 50), Wein("Wein", 40), Zinn("Zinn", 90);
 
 	private String name;
-	private int preis;
+	private int maxPreis;
+
+	public static final int ANZAHL = 8;
 
 	private Gut(String name, int preis) {
 		this.name = name;
-		this.preis = preis;
+		this.maxPreis = preis;
 	}
 
-	public int getPreis() {
-		return this.preis;
+	public int getMaxPreis() {
+		return this.maxPreis;
 	}
 
 	public String getName() {

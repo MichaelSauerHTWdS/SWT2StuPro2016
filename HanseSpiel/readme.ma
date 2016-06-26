@@ -1,4 +1,4 @@
-#Version 0.04
+#Version 0.05
 Autoren:	- David : ki.david.baldauf@htw-saarland.de
 			-
 					
@@ -32,6 +32,7 @@ Das ist die Erste Grundlags Version des Spiels(Das selbst noch nicht da ist).
 		+ TODO 
 			# Kontoren
 			# Lokale Güter
+                        # Waren An- und Verkauf
 		
 	- Spieler
 		+ TODO
@@ -59,15 +60,20 @@ Das ist die Erste Grundlags Version des Spiels(Das selbst noch nicht da ist).
 			# Hafen 
 				* Entsenden
 				* Reparieren
+                                * Ent-/Beladen (Zu Kontor)
 				* TODO
 					- Aufrüsten
-					- Ent-/Beladen
+					- 
 					- Ver-/Kauf von Schiffen 
 			# TODO Kontor (ver-/kauf von Gütern)
 			
 	- GUI (Graphische)
 		+ TODO
-		
+	
+	- Exception
+            + Lager fehler
+            + TODO
+                # all over
 			
 Starten:
     java -jar HanseSpiel.jar

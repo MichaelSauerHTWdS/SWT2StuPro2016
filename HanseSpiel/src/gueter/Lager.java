@@ -15,6 +15,8 @@ public class Lager {
 	private int kapazitaet;
 	private int MAXKAPAZITAET;
 
+	private boolean unedlich;
+
 	/**
 	 * Constructor
 	 * 
@@ -24,19 +26,36 @@ public class Lager {
 		gueter = new HashMap<Gut, Integer>();
 		this.kapazitaet = kapazitaet;
 		this.MAXKAPAZITAET = kapazitaet;
+		this.unedlich = false;
+
+		if (this.MAXKAPAZITAET == -1) {
+			this.unedlich = true;
+		}
+
 	}
 
-	public int getKapazitaet() {
-		return kapazitaet;
-	}
-
+	/**
+	 * Entfernt alle Güter aus dem Lager
+	 */
 	public void clearLager() {
 		this.gueter.clear();
 		this.kapazitaet = this.MAXKAPAZITAET;
 	}
 
-	public int entladen(Gut gut, int request) {
-		int bestand = gueter.get(gut);
+	/**
+	 * Entnimmt eine bestimmte Menge eines gutes aus dem Lager
+	 * 
+	 * @param gut
+	 * @param request
+	 * @return -1 wenn nicht genug Gueter im Lager sind
+	 * @throws LagerException
+	 */
+	public int auslagern(Gut gut, int request) throws LagerException {
+		Integer bestand = gueter.get(gut);
+
+		if (bestand == null) {
+			throw new LagerException("Lager -> Gut nicht vorhanden", request, gut, -1);
+		}
 
 		// Ueberpruefen ob die Anzahl des Gutes da ist.
 		if (request <= bestand) {
@@ -56,16 +75,22 @@ public class Lager {
 
 			return request;
 		} else {
-			// TODO Es sind nicht genuegend Gueter im Lager.
+			throw new LagerException("Lager -> nicht genug vorhanden", request, gut, bestand);
 		}
-
-		return -1;
 	}
 
-	public int beladen(Gut gut, int menge) {
+	/**
+	 * Lagert bestimmte Menge eines Gutes im Lager
+	 * 
+	 * @param gut
+	 * @param menge
+	 * @return -1 wenn Lager Menge nicht aufnehmen kann
+	 * @throws LagerException
+	 */
+	public int lagern(Gut gut, int menge) throws LagerException {
 
 		// Ueberpruefen ob noch kapazitaet da ist
-		if (menge <= this.kapazitaet) {
+		if (menge <= this.kapazitaet || this.unedlich) {
 			// Kann zugeladen werden
 			this.kapazitaet -= menge;
 
@@ -75,11 +100,10 @@ public class Lager {
 			} else {
 				this.gueter.put(gut, menge);
 			}
+			return this.kapazitaet;
 		} else {
-			// TODO wenn nicht genug platz im Laget ist
+			throw new LagerException("Lager -> Kein Platz", menge, gut, this.kapazitaet);
 		}
-
-		return -1;
 	}
 
 	public String toString() {
@@ -89,6 +113,33 @@ public class Lager {
 		}
 
 		return tmp;
+	}
+
+	public int getKapazitaet() {
+		return kapazitaet;
+	}
+
+	/**
+	 * Look: [Gut] -> [Menge]
+	 * 
+	 * @return String[]
+	 */
+	public String[] gutListe() {
+		String gutListe[] = new String[Gut.ANZAHL];
+		int i = 0;
+		for (Gut gut : Gut.values()) {
+			gutListe[i] = gut.getName();
+			gutListe[i] += " -> ";
+
+			Integer menge = this.gueter.get(gut);
+			if (menge == null) {
+				gutListe[i] += 0;
+			} else {
+				gutListe[i] += menge;
+			}
+			i++;
+		}
+		return gutListe;
 	}
 
 }

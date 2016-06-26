@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import gueter.Gut;
 import gueter.Lager;
+import gueter.LagerException;
 import objekt.GeoObjekt;
 import objekt.Stadt;
 import player.Player;
@@ -182,12 +183,12 @@ public class Schiff {
 		this.target = target;
 	}
 
-	public void beladen(Gut gut, int menge) {
-		this.lager.beladen(gut, menge);
+	public void beladen(Gut gut, int menge) throws LagerException {
+		this.lager.lagern(gut, menge);
 	}
 
-	public void entladen(Gut gut, int request) {
-		this.lager.entladen(gut, request);
+	public void entladen(Gut gut, int request) throws LagerException {
+		this.lager.auslagern(gut, request);
 	}
 
 	public int getSchadenpunkte() {

@@ -3,7 +3,10 @@ package tui;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import gueter.Gut;
+import gueter.LagerException;
 import objekt.Stadt;
+import player.Kontor;
 import player.Player;
 import schiff.Schiff;
 import schiff.SchiffsTyp;
@@ -13,12 +16,12 @@ import schiff.SchiffsTyp;
  * @author davidbaldauf (ki.david.baldauf@htw-saarland.de)
  *
  */
-public class Menues {
+public class MenuesTUI {
 
 	Manager manager;
 	Scanner read = new Scanner(System.in);
 
-	public Menues(Manager manager) {
+	public MenuesTUI(Manager manager) {
 		this.manager = manager;
 
 	}
@@ -54,7 +57,7 @@ public class Menues {
 	public void showWorldMenue(Player player) {
 		this.showPlayerKonto(player);
 		this.showPlayerLog(player);
-		
+
 		boolean endTurn = false;
 		while (endTurn == false) {
 			println(0 + " - Beende Zug");
@@ -142,7 +145,7 @@ public class Menues {
 				this.hafenMenue(stadt, player);
 				break;
 			case 2:
-				// showKontorMenue
+				this.showKontorMenue(stadt, player);
 				break;
 			case 0:
 				back = true;
@@ -202,6 +205,8 @@ public class Menues {
 			println(2 + " - Reparieren (Kosten:  " + schiff.getRepaturkosten() + ")");
 			println(3 + " - Aufrüsten");
 
+			println(4 + " - Be-/Entladen");
+
 			println(0 + " - Zurück zum Hafen");
 
 			int eingabe = intEinlesen();
@@ -230,8 +235,11 @@ public class Menues {
 			case 3:
 				// TODO Aufrüsten
 				break;
+			case 4:
+				this.showVerladeMenue(schiff, ((Stadt) schiff.getPosition()).Kontoren.get(player));
+				break;
 			case 0:
-				return;
+				back = true;
 			default:
 				break;
 			}
@@ -321,6 +329,67 @@ public class Menues {
 
 					new Schiff(name, stadt, SchiffsTyp.Kogge, p);
 				}
+			}
+		}
+	}
+
+	private void showKontorMenue(Stadt stadt, Player player) {
+		println(stadt.Kontoren.get(player).toString());
+
+	}
+
+	private void showVerladeMenue(Schiff schiff, Kontor kontor) {
+
+		boolean way = true; // way = true (toShip) - false (toKontor)
+		String toShip = "  <<--<<  ";
+		String toKontor = "  >>-->>  ";
+		String to = toShip;
+
+		boolean exit = false;
+
+		while (exit == false) {
+			String[] schiffsLager = schiff.lager.gutListe();
+			String[] kontorLager = kontor.lager.gutListe();
+
+			println(" - Schiff - " + to + " - Kontor - ");
+			for (int i = 0; i < Gut.ANZAHL; i++) {
+				println(schiffsLager[i] + to + kontorLager[i]);
+			}
+			println("------------------------------------------");
+			println("12 - Change Way");
+			println("13 - GoBack");
+			int einlesen = this.intEinlesen();
+			Gut[] gueter = Gut.values();
+
+			if (einlesen < 8 && 0 <= einlesen) {
+				Gut gut = gueter[einlesen];
+
+				println("Wie viel " + gut.getName() + "??");
+				einlesen = this.intEinlesen();
+				try {
+					if (way) {
+						kontor.lager.auslagern(gut, einlesen);
+						schiff.beladen(gut, einlesen);
+					} else {
+						schiff.entladen(gut, einlesen);
+						kontor.lager.lagern(gut, einlesen);
+					}
+				} catch (LagerException e) {
+					println(e.toString());
+				}
+
+			} else if (einlesen == 12) {
+				if (way) {
+					// Waren sollen jetzt in den Kontor gelegt werden
+					to = toKontor;
+					way = false;
+				} else {
+					// Warem sollen jetzt ans Schiff gehen
+					to = toShip;
+					way = true;
+				}
+			} else if (einlesen == 13) {
+				exit = true;
 			}
 		}
 	}

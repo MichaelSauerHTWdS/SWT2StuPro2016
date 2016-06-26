@@ -9,6 +9,7 @@ import schiff.Schiff;
  * 
  * @author davidbaldauf (ki.david.baldauf@htw-saarland.de)
  *
+ * @Info Routen koennen immer von beiden seiten genutzt werden. 
  */
 public class SeeRoute {
 
@@ -21,6 +22,12 @@ public class SeeRoute {
 
 	int laenge;
 
+	/**
+	 * SeeRoute genertiet seine Wasserflaeche selbst.
+	 * @param stadt_1 Beginn der Route
+	 * @param stadt_2 Ende der Route
+	 * @param laenge Laenge der Route
+	 */
 	public SeeRoute(Stadt stadt_1, Stadt stadt_2, int laenge) {
 
 		this.laenge = laenge;
@@ -37,7 +44,37 @@ public class SeeRoute {
 	}
 
 	/**
-	 * Verteilt die Events auf die Wasserfläche.
+	 * Legt eine Route mit vorherangeletem Wasser an. Wichtig für graphische
+	 * Darstellung
+	 * 
+	 * @param stadt_1
+	 *            Beginn der Route
+	 * @param stadt_2
+	 *            Ende der Route
+	 * @param laenge
+	 *            Laenge der Route
+	 * @param wasser
+	 *            Alle Wasser Flaechen
+	 * @param pos
+	 *            Die position der benoetigten Wasserflaechen
+	 */
+	public SeeRoute(Stadt stadt_1, Stadt stadt_2, int laenge, ArrayList<Wasser> wasser, Integer[] pos) {
+
+		this.laenge = laenge;
+		this.stadt_1 = stadt_1;
+		this.stadt_2 = stadt_2;
+
+		stadt_1.SeeRouten.add(this);
+		stadt_2.SeeRouten.add(this);
+
+		for (int i = 0; i < pos.length; i++) {
+			this.route.add(wasser.get(pos[i]));
+		}
+
+	}
+
+	/**
+	 * Verteilt die Events auf die Wasserflaeche.
 	 */
 	public void intialEvents() {
 		for (Wasser w : route) {
@@ -61,7 +98,7 @@ public class SeeRoute {
 		for (Wasser w : route) {
 			for (int i = 0; i < w.schiffe.size(); i++) {
 				Schiff s = w.schiffe.get(i);
-				// Prüfen ob das Schiff sich diese Runde schon bewegt hat
+				// Pruefen ob das Schiff sich diese Runde schon bewegt hat
 				if (s.hasMoved() == false) {
 					toMove.put(s, w);
 				} else {
@@ -76,7 +113,7 @@ public class SeeRoute {
 	}
 
 	/**
-	 * Bewegt eine einzeles Schiff von einem Abschnitt zum nächsten.
+	 * Bewegt eine einzeles Schiff von einem Abschnitt zum naechsten.
 	 * 
 	 * @param w
 	 * @param s
@@ -116,13 +153,13 @@ public class SeeRoute {
 	}
 
 	/**
-	 * Fügt einer Route ein Schiff hinzu
+	 * Fuegt einer Route ein Schiff hinzu
 	 * 
 	 * @param s
 	 * @param start
 	 */
 	public void addShipToRoute(Schiff s, Stadt start) {
-		// Position wo das schiff eingefügt wird
+		// Position wo das Schiff eingefuegt wird
 		int position = 0;
 		start.schiffe.remove(s);
 		if (start.equals(this.stadt_1)) {

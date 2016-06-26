@@ -2,7 +2,7 @@ package run;
 
 import player.Player;
 import tui.Manager;
-import tui.Menues;
+import tui.MenuesTUI;
 
 /**
  * 
@@ -14,12 +14,14 @@ public class Run {
 	public static void main(String[] args) {
 
 		Manager manager = new Manager();
-		Menues menues = new Menues(manager);
+		MenuesTUI menues = new MenuesTUI(manager);
 
 		// ------------------------------ Testerstellung ---
 
 		// ------------------------------ Normal Game---
 		menues.beforeStart();
+
+		manager.createKontors();
 
 		boolean next = true;
 
@@ -46,7 +48,7 @@ public class Run {
 
 		}
 
-		Menues.println("Die Partie ist vorbei Auswertung: ");
+		MenuesTUI.println("Die Partie ist vorbei Auswertung: ");
 
 		// TODO Statistik
 
