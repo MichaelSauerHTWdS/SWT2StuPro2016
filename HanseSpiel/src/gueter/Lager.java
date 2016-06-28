@@ -20,7 +20,7 @@ public class Lager {
 	/**
 	 * Constructor
 	 * 
-	 * @param kapazitaet
+	 * @param kapazitaet -1 dan ist das Lager unendlich groß.
 	 */
 	public Lager(int kapazitaet) {
 		gueter = new HashMap<Gut, Integer>();

@@ -6,6 +6,7 @@ import java.util.Scanner;
 import gueter.Gut;
 import gueter.LagerException;
 import objekt.Stadt;
+import player.KontoException;
 import player.Kontor;
 import player.Player;
 import schiff.Schiff;
@@ -145,7 +146,7 @@ public class MenuesTUI {
 				this.hafenMenue(stadt, player);
 				break;
 			case 2:
-				this.showKontorMenue(stadt, player);
+				this.showKontorMenue(stadt, stadt.Kontoren.get(player), player);
 				break;
 			case 0:
 				back = true;
@@ -228,7 +229,11 @@ public class MenuesTUI {
 
 				break;
 			case 2:
-				if (player.bezahlen(schiff.getRepaturkosten()) == -1) {
+				try {
+					player.bezahlen(schiff.getRepaturkosten());
+					schiff.repair();
+					println("Das Schiff " + schiff.getName() + " wurde repariert!");
+				} catch (KontoException e) {
 					println("-- !! -- Sie haben nicht genug Geld -- !! --");
 				}
 				break;
@@ -390,6 +395,53 @@ public class MenuesTUI {
 				}
 			} else if (einlesen == 13) {
 				exit = true;
+			}
+		}
+	}
+
+	private void showKontorMenue(Stadt stadt, Kontor kontor, Player player) {
+
+		boolean back = false;
+		while (back == false) {
+			println(1 + " - Kaufe regionales Gut (" + stadt.markt.getRegionalesGut().getName() + ")");
+			println(2 + " - Zeige Preis/Lager - Liste der Stadt " + stadt.getName());
+			println(3 + " - Verkaufe Gut aus dem Kontor ");
+
+			int eingabe = this.intEinlesen();
+
+			switch (eingabe) {
+			case 1:
+				println("Wie viel  " + stadt.markt.getRegionalesGut().getName() + " soll gekauft werden??");
+				eingabe = this.intEinlesen();
+				try {
+					stadt.markt.regionalesGutVerkaufen(eingabe, kontor, player);
+				} catch (KontoException e) {
+					println("Nicht genung Geld um " + eingabe + " zukaufen.");
+					println("Kontostand : " + e.getKontostand() + "Kosten: " + e.getPreis());
+				} catch (LagerException e) {
+					println("Nicht genung Platz um " + eingabe + " zulagern.");
+					println("Freier Lager Platz: " + e.getPlatz());
+				}
+				break;
+			case 2:
+				println("Preis Lager Liste");
+				println("Gut\t\t" + "\tLager-Menge\t" + "\tKaufPreis");
+				HashMap<Gut, Integer[]> preisLagerList = stadt.markt.getPreisLagerListe();
+				for (Gut g : Gut.values()) {
+					if(g.equals(Gut.Stockfisch)){
+						println(g.getName() + "\t\t\t" + preisLagerList.get(g)[1] + "\t\t" + preisLagerList.get(g)[0]);
+					} else {
+						println(g.getName() + "\t\t\t\t" + preisLagerList.get(g)[1] + "\t\t" + preisLagerList.get(g)[0]);
+					}
+				}
+				break;
+			case 3:
+				break;
+			case 0:
+				back = true;
+				break;
+			default:
+				break;
 			}
 		}
 	}

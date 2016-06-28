@@ -1,9 +1,19 @@
-#Version 0.05
+#Version 0.06
 Autoren:	- David : ki.david.baldauf@htw-saarland.de
 			-
 					
 Das ist die Erste Grundlags Version des Spiels(Das selbst noch nicht da ist).
 
+        - Runden Ablauf
+                + Events
+                + Schiffs Bewegung
+                + Spieler Reihenfoleg
+                + TODO:
+                        # Preisneuberechnung
+                      
+                        
+                    
+        
 	- Events
 		+ Piraten
 		+ Wetter
@@ -33,7 +43,12 @@ Das ist die Erste Grundlags Version des Spiels(Das selbst noch nicht da ist).
 			# Kontoren
 			# Lokale Güter
                         # Waren An- und Verkauf
-		
+        - Markt
+                + Stadt Lager
+                + Organiesiert den An und Verkauf der Waren
+                + Preisbestimmung
+                + TODO:
+                    Individueller Verbrauch von waren
 	- Spieler
 		+ TODO
 			# ?
@@ -65,13 +80,19 @@ Das ist die Erste Grundlags Version des Spiels(Das selbst noch nicht da ist).
 					- Aufrüsten
 					- 
 					- Ver-/Kauf von Schiffen 
-			# TODO Kontor (ver-/kauf von Gütern)
+			# Kontor 
+                                * Kauf des Regional Gutes
+                                * Preis-Liste und Lager Bestände anzeigen 
+                                * TODO
+                                        - Verkauf von Gütern
+                                        - Regional Gut besser darstellen
 			
 	- GUI (Graphische)
 		+ TODO
 	
 	- Exception
             + Lager fehler
+            + Konto fehler
             + TODO
                 # all over
 			

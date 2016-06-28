@@ -34,11 +34,6 @@ public class Kontor {
 		standort.Kontoren.put(owner, kontor);
 	}
 
-	public int einkauf(Gut gut, int anzahl) {
-		int r = 0;
-
-		return r;
-	}
 
 	@Override
 	public String toString() {

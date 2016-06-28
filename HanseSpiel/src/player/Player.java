@@ -20,17 +20,16 @@ public class Player {
 	public Player(String name, int kapital) {
 		this.name = name;
 		this.schiffe = new ArrayList<Schiff>();
+
 		this.konto = new Konto(kapital);
 	}
 
-	void buyShip(Stadt stadt, SchiffsTyp typ) {
-		if (konto.auszahlung(typ.getKaufpreis()) < 0) {
-			// TODO Nicht genug Geld
-		} else {
-			Schiff schiff = new Schiff("", stadt, typ, this);
-			stadt.schiffe.add(schiff);
-			this.schiffe.add(schiff);
-		}
+	void buyShip(Stadt stadt, SchiffsTyp typ) throws KontoException {
+		konto.auszahlung(typ.getKaufpreis());
+
+		Schiff schiff = new Schiff("", stadt, typ, this);
+		stadt.schiffe.add(schiff);
+		this.schiffe.add(schiff);
 	}
 
 	public String getName() {
@@ -41,8 +40,12 @@ public class Player {
 		return this.konto.kontostand;
 	}
 
-	public int bezahlen(int kosten) {
+	public int bezahlen(int kosten) throws KontoException {
 		return this.konto.auszahlung(kosten);
+	}
+
+	public void einzahlen(int einzahlung) {
+		this.konto.einzahlung(einzahlung);
 	}
 
 	public void setGuthaben(int guthaben) {

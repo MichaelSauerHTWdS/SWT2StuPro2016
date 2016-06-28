@@ -18,10 +18,11 @@ public class Konto {
 	 * 
 	 * @param zahlung
 	 * @return neuer Kontostand wenn genug Geld da ist ,sonst -1
+	 * @throws KontoException
 	 */
-	public int auszahlung(int zahlung) {
+	public int auszahlung(int zahlung) throws KontoException {
 		if (this.kontostand < zahlung) {
-			return -1;
+			throw new KontoException("Nicht genung Geld", zahlung, this.kontostand);
 		} else {
 			this.kontostand -= zahlung;
 		}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import gueter.Gut;
+import gueter.Markt;
 import player.Kontor;
 import player.Player;
 import schiff.Schiff;
@@ -19,22 +20,13 @@ public class Stadt extends GeoObjekt {
 	public ArrayList<SeeRoute> SeeRouten;
 	public HashMap<Player, Kontor> Kontoren;
 
-	public Gut regionalGut;
-
-	public HashMap<Gut, Integer> preisListe;
+	public Markt markt;
 
 	public Stadt(String name, Gut regionalGut) {
 		this.name = name;
 		this.SeeRouten = new ArrayList<SeeRoute>();
 		this.Kontoren = new HashMap<Player, Kontor>();
-		this.regionalGut = regionalGut;
-		this.preisListe = new HashMap<Gut, Integer>();
-
-		for (Gut gut : Gut.values()) {
-			if (gut != this.regionalGut) {
-				this.preisListe.put(gut, gut.getMaxPreis());
-			}
-		}
+		this.markt = new Markt(regionalGut);
 	}
 
 	public SeeRoute getASeeRouteByStadt(String zStadt) {
