@@ -20,6 +20,16 @@ public enum Gut {
 		this.maxPreis = preis;
 	}
 
+	static public Gut stringToGut(String name) throws LagerException {
+
+		for (Gut g : Gut.values()) {
+			if (g.name.equals(name)) {
+				return g;
+			}
+		}
+		throw new LagerException("String konnte nicht umgeandelt werden", 0, null, 0);
+	}
+
 	public int getMaxPreis() {
 		return this.maxPreis;
 	}

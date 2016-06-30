@@ -31,6 +31,7 @@ public class Run {
 			manager.intialEvents();
 			manager.executeEvents();
 
+			manager.stadtVerbrauchUPreis();
 			//
 			manager.moveAll();
 

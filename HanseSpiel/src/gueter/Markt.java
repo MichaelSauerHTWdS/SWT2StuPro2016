@@ -3,21 +3,20 @@ package gueter;
 import java.util.HashMap;
 
 import player.KontoException;
-import player.Kontor;
 import player.Player;
 
-public class Markt {
-	Lager warenLager;
+public class Markt extends Lager {
 
 	HashMap<Gut, Integer> preisliste;
 	int verbrauch = 5;
 	Gut regionalesGut;
 
 	public Markt(Gut regionalesGut) {
+		super(-1);
 		this.regionalesGut = regionalesGut;
-		this.warenLager = new Lager(-1);
+
 		this.preisliste = new HashMap<Gut, Integer>();
-		
+
 		for (Gut g : Gut.values()) {
 			if (g.equals(regionalesGut)) {
 				this.preisliste.put(regionalesGut, 10);
@@ -46,7 +45,7 @@ public class Markt {
 			return; // Der Preis des regionalen Gutes bleibt immer gleich!!
 		}
 
-		double tmp = this.warenLager.gueter.get(gut) / this.verbrauch;
+		double tmp = this.gueter.get(gut) / this.verbrauch;
 
 		if (tmp <= 1) {
 			this.preisliste.replace(gut, gut.getMaxPreis());
@@ -61,17 +60,25 @@ public class Markt {
 	 */
 	public void allePreiseNeuBerechnen() {
 		for (Gut gut : Gut.values()) {
-
 			this.preisNeuBerechnen(gut);
 		}
 	}
 
+	/**
+	 * Verkauft das Regionale Gut an einen Spieler-Kontor.
+	 * 
+	 * @param menge
+	 * @param kontor
+	 * @param player
+	 * @throws LagerException
+	 * @throws KontoException
+	 */
 	public void regionalesGutVerkaufen(int menge, Kontor kontor, Player player) throws LagerException, KontoException {
 		int preis = menge * 10;
 
 		player.bezahlen(preis);
 		try {
-			kontor.lager.lagern(this.regionalesGut, menge);
+			kontor.lagern(this.regionalesGut, menge);
 		} catch (LagerException e) {
 			// Konto wird zurück gerollt
 			player.einzahlen(preis);
@@ -90,7 +97,7 @@ public class Markt {
 
 		for (Gut g : Gut.values()) {
 			int preis = this.preisliste.get(g);
-			Integer menge = this.warenLager.gueter.get(g);
+			Integer menge = this.gueter.get(g);
 			if (menge == null) {
 				menge = 0;
 			}
@@ -103,15 +110,27 @@ public class Markt {
 		return preisLagerList;
 	}
 
-	public void gutAnkauf(Gut gut, int menge, Kontor kontor, Player player) throws LagerException {
-		kontor.lager.auslagern(gut, menge);
+	/**
+	 * Der Markt kauft ein bestimmtes Gut an. Der Spieler bekommt das Geld
+	 * dirket gutgeschrieben. Die Waren werden aus dem Kontor entfernt.
+	 * 
+	 * @param gut
+	 * @param menge
+	 * @param kontor
+	 * @param player
+	 * @throws LagerException
+	 */
+	public int gutAnkauf(Gut gut, int menge, Kontor kontor, Player player) throws LagerException {
+		kontor.auslagern(gut, menge);
 		int preis = this.preisliste.get(gut) * menge;
 		try {
-			this.warenLager.lagern(gut, menge);
+			this.lagern(gut, menge);
 		} catch (LagerException e) {
 			e.printStackTrace();
 		}
 		player.einzahlen(preis);
+		this.preisNeuBerechnen(gut);
+		return preis;
 	}
 
 	public Gut getRegionalesGut() {

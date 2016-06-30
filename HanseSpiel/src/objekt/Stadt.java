@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import gueter.Gut;
+import gueter.Kontor;
 import gueter.Markt;
-import player.Kontor;
 import player.Player;
 import schiff.Schiff;
 

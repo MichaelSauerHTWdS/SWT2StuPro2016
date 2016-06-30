@@ -20,7 +20,8 @@ public class Lager {
 	/**
 	 * Constructor
 	 * 
-	 * @param kapazitaet -1 dan ist das Lager unendlich groß.
+	 * @param kapazitaet
+	 *            -1 dan ist das Lager unendlich groß.
 	 */
 	public Lager(int kapazitaet) {
 		gueter = new HashMap<Gut, Integer>();
@@ -113,6 +114,16 @@ public class Lager {
 		}
 
 		return tmp;
+	}
+
+	/**
+	 * Gibt den Lagerbestand eines bestimmten Gutes aus.
+	 * @param gut
+	 * @return
+	 */
+	public int getBestand(Gut gut) {
+
+		return this.gueter.get(gut);
 	}
 
 	public int getKapazitaet() {

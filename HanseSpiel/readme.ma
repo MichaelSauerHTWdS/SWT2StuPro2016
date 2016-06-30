@@ -1,4 +1,4 @@
-#Version 0.06
+#Version 0.07
 Autoren:	- David : ki.david.baldauf@htw-saarland.de
 			-
 					
@@ -8,12 +8,9 @@ Das ist die Erste Grundlags Version des Spiels(Das selbst noch nicht da ist).
                 + Events
                 + Schiffs Bewegung
                 + Spieler Reihenfoleg
-                + TODO:
-                        # Preisneuberechnung
-                      
-                        
-                    
-        
+                + Preis Berechnung
+                + Verbrauch von Gütern
+
 	- Events
 		+ Piraten
 		+ Wetter
@@ -22,43 +19,44 @@ Das ist die Erste Grundlags Version des Spiels(Das selbst noch nicht da ist).
 		+ Alle Typen
 		
 	- Lager
-		+ TODO
-			# ??
 		+ Einlagern und auslagern möglich
 		+ Max. Kap festlegen
-		
+		+ TODO
+			# ??
 	- SeeRouten
 		+ befahrbar
 		+ TODO
-			# mehre SeeRouten nutzen gleiches Wasser
+			# mehre SeeRouten nutzen gleiches Wasser (siehe Wasser)
 		
 	- Wasser
 		+ Events werden generiert
 		+ TODO 
-			# Wasseranzahl verringern 
+			# Wasseranzahl verringern (Wird mit GUI implementiert)
 		
 	- Städte
 		+ Schiff können anlegen/ablegen
-		+ TODO 
-			# Kontoren
-			# Lokale Güter
-                        # Waren An- und Verkauf
+		+ Kontoren
+        
         - Markt
                 + Stadt Lager
                 + Organiesiert den An und Verkauf der Waren
                 + Preisbestimmung
                 + TODO:
-                    Individueller Verbrauch von waren
+                    Individueller Verbrauch von waren (Unwichtig)
 	- Spieler
 		+ TODO
 			# ?
 	- Konten
 		+ aus-/einbezahlen
 		+ TODO
-			# mehr funktionalität
+			# ?
 	- Gut
 	
-	- TODO Erfolge
+	- TODO Erfolge (-.-)
+            + Erfassung der entsprechden Events
+    
+        - TODO Runden Begrenzung  ( esay )
+    
 	
 	- TUI (Text)
 		+ Spiel Einstellungen
@@ -78,14 +76,13 @@ Das ist die Erste Grundlags Version des Spiels(Das selbst noch nicht da ist).
                                 * Ent-/Beladen (Zu Kontor)
 				* TODO
 					- Aufrüsten
-					- 
 					- Ver-/Kauf von Schiffen 
 			# Kontor 
                                 * Kauf des Regional Gutes
                                 * Preis-Liste und Lager Bestände anzeigen 
-                                * TODO
-                                        - Verkauf von Gütern
-                                        - Regional Gut besser darstellen
+                                * Verkauf von Gütern
+                                * TODO 
+                                        - Regional Gut besser darstellen (Wird nicht merh kommen)
 			
 	- GUI (Graphische)
 		+ TODO

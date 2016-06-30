@@ -3,9 +3,9 @@ package tui;
 import java.util.ArrayList;
 
 import gueter.Gut;
+import gueter.Kontor;
 import objekt.SeeRoute;
 import objekt.Stadt;
-import player.Kontor;
 import player.Player;
 import schiff.Schiff;
 
@@ -165,6 +165,13 @@ public class Manager {
 		this.startGuthaben = startGuthaben;
 		for (Player p : this.players) {
 			p.setGuthaben(startGuthaben);
+		}
+	}
+
+	public void stadtVerbrauchUPreis() {
+		for (Stadt s : this.staedte) {
+			s.markt.verbrauch();
+			s.markt.allePreiseNeuBerechnen();
 		}
 	}
 

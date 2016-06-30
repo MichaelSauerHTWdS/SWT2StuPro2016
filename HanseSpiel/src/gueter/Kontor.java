@@ -1,19 +1,21 @@
-package player;
+package gueter;
 
-import gueter.Gut;
-import gueter.Lager;
 import objekt.Stadt;
+import player.Player;
 
-public class Kontor {
+/**
+ * 
+ * @author davidbaldauf Erweitert die Klasse Lager. Stellt den Spieler Kontor in
+ *         einer Stadt da
+ */
+public class Kontor extends Lager {
 
 	static final int MAXKAPKONTOR = 1000;
 
-	Player owner;
-	int kap;
+	private Player owner;
+	private int kap;
 
-	Stadt standort;
-
-	public Lager lager;
+	private Stadt standort;
 
 	/**
 	 * 
@@ -22,11 +24,11 @@ public class Kontor {
 	 * @param standort
 	 */
 	public Kontor(Player owner, int kap, Stadt standort) {
+		super(kap);
 		this.owner = owner;
 		this.kap = kap;
 		this.standort = standort;
 
-		this.lager = new Lager(this.kap);
 	}
 
 	public static void createKontor(Player owner, Stadt standort) {
@@ -34,11 +36,22 @@ public class Kontor {
 		standort.Kontoren.put(owner, kontor);
 	}
 
+	public Player getOwner() {
+		return owner;
+	}
+
+	public int getKap() {
+		return kap;
+	}
+
+	public Stadt getStandort() {
+		return standort;
+	}
 
 	@Override
 	public String toString() {
 		String tmp = "Kontor in " + this.standort.getName() + " \n";
-		tmp += this.lager.toString();
+		tmp += super.toString();
 		return tmp;
 	}
 
