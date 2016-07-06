@@ -1,7 +1,7 @@
 package run;
 
+import gui.CreateGUI;
 import player.Player;
-import tui.Manager;
 import tui.MenuesTUI;
 
 /**
@@ -14,13 +14,24 @@ public class Run {
 	public static void main(String[] args) {
 
 		Manager manager = new Manager();
-		MenuesTUI menues = new MenuesTUI(manager);
+		MenuesTUI tui = new MenuesTUI(manager);
+		CreateGUI gui = new CreateGUI(manager);
 
 		// ------------------------------ Testerstellung ---
 
 		// ------------------------------ Normal Game---
-		menues.beforeStart();
 
+		gui.setVisible(true);
+
+		tui.beforeStart();
+		if (manager.players.isEmpty()) {
+			MenuesTUI.println("Fehler ! - Kein Spieler Eingetragen -> Spiel Beendet!!");
+
+			return;
+		}
+
+		manager.actPlayer = manager.players.get(0);
+		gui.fill();
 		manager.createKontors();
 
 		boolean next = true;
@@ -37,16 +48,18 @@ public class Run {
 
 			//
 			manager.searchForDeadShips();
-
+			gui.update();
 			// Spieler kommen nach einaderdran
 			for (Player p : manager.players) {
-				menues.showWorldMenue(p);
+				manager.actPlayer = p;
+				gui.update();
+				tui.showWorldMenue(p);
 			}
 
 			if (manager.players.isEmpty()) {
 				next = false;
 			}
-
+			manager.actPlayer = manager.players.get(0);
 		}
 
 		MenuesTUI.println("Die Partie ist vorbei Auswertung: ");

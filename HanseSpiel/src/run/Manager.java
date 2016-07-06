@@ -1,4 +1,4 @@
-package tui;
+package run;
 
 import java.util.ArrayList;
 
@@ -19,9 +19,11 @@ public class Manager {
 	public ArrayList<Player> players;
 	public ArrayList<SeeRoute> seeRouten;
 	public ArrayList<Stadt> staedte;
+	
+	public Player actPlayer;
 
 	int startGuthaben = 100000;
-	int startSchiffe = 2;
+	private int startSchiffe = 2;
 
 	public Manager() {
 		players = new ArrayList<Player>();
@@ -43,6 +45,10 @@ public class Manager {
 			staedte.add(new Stadt(namen[i], reginonalGueter[i]));
 
 		}
+	}
+
+	public int getStartGuthaben() {
+		return startGuthaben;
 	}
 
 	public Stadt getCityByName(String name) {
@@ -173,6 +179,14 @@ public class Manager {
 			s.markt.verbrauch();
 			s.markt.allePreiseNeuBerechnen();
 		}
+	}
+
+	public int getStartSchiffe() {
+		return startSchiffe;
+	}
+
+	public void setStartSchiffe(int startSchiffe) {
+		this.startSchiffe = startSchiffe;
 	}
 
 }

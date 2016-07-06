@@ -59,7 +59,7 @@ public class Markt extends Lager {
 	 * Berechnet alle Güter Preise neue. Ausser Regionales Gut.
 	 */
 	public void allePreiseNeuBerechnen() {
-		for (Gut gut : Gut.values()) {
+		for (Gut gut : this.gueter.keySet()) {
 			this.preisNeuBerechnen(gut);
 		}
 	}

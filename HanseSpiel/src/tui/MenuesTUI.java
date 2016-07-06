@@ -9,6 +9,7 @@ import gueter.LagerException;
 import objekt.Stadt;
 import player.KontoException;
 import player.Player;
+import run.Manager;
 import schiff.Schiff;
 import schiff.SchiffsTyp;
 
@@ -135,7 +136,7 @@ public class MenuesTUI {
 		while (back == false) {
 			println("------------------" + stadt.getName() + "------------------");
 			println(1 + " - Zum Hafen gehen");
-			println(2 + " - Kontor Besuschen"); // TODO
+			println(2 + " - Kontor Besuschen");
 
 			println(0 + " - Zurueck zur Weltkarte");
 
@@ -276,8 +277,8 @@ public class MenuesTUI {
 		boolean start = false;
 		while (start == false) {
 			println("------------ Spiel-Eintsellung ------------");
-			println(1 + " - Start-Kapital -> " + manager.startGuthaben + " Mark");
-			println(2 + " - Start-Schiffe -> " + manager.startSchiffe + " Schiffe");
+			println(1 + " - Start-Kapital -> " + manager.getStartGuthaben() + " Mark");
+			println(2 + " - Start-Schiffe -> " + manager.getStartSchiffe() + " Schiffe");
 			println("-------------------------------------------");
 			println(3 + " - Spieler hinzufügen (Momentan " + manager.players.size() + " )");
 			println("-------------------------------------------");
@@ -299,13 +300,13 @@ public class MenuesTUI {
 				if (eingabe <= 0) {
 					println("Die Start-Schiff anzahl muss größer 0 sein!!!");
 				} else {
-					manager.startSchiffe = eingabe;
+					manager.setStartSchiffe(eingabe);
 				}
 				break;
 			case 3:
 				println("Spieler-Name eingeben: ");
 				String name = this.read.nextLine();
-				this.manager.players.add(new Player(name, this.manager.startGuthaben));
+				this.manager.players.add(new Player(name, this.manager.getStartGuthaben()));
 				break;
 			case 4:
 				this.schiffeVerteilen();
@@ -320,9 +321,9 @@ public class MenuesTUI {
 
 	private void schiffeVerteilen() {
 		for (Player p : manager.players) {
-			while (p.schiffe.size() < manager.startSchiffe) {
+			while (p.schiffe.size() < manager.getStartSchiffe()) {
 				println(p.getName() + " bitte verteile deine Schiffe ");
-				println("Zu verteilende Schiffe: " + (manager.startSchiffe - p.schiffe.size()));
+				println("Zu verteilende Schiffe: " + (manager.getStartSchiffe() - p.schiffe.size()));
 
 				int eingabe = this.showStaedte();
 
