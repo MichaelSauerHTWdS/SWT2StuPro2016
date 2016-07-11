@@ -1,6 +1,9 @@
-package hanse.kontor2016;
+package hanse.kontor2016.lokalitaeten;
 
 import java.util.LinkedList;
+
+import hanse.kontor2016.kontor.Kontor;
+import hanse.kontor2016.schiff.Schiff;
 
 public class GeoObjekt {
 	public static final boolean STADT = false;
@@ -17,11 +20,9 @@ public class GeoObjekt {
 	private Werft werft = null;
 	private final int id = idcount++;
 
-	public GeoObjekt(String name, boolean typ, double wetter, boolean pirate, Kontor kontor, Hafen hafen, Werft werft) {
+	public GeoObjekt(String name, boolean typ, Kontor kontor, Hafen hafen, Werft werft) {
 		this.name = name;
 		this.typ = typ;
-		this.wetter = wetter;
-		this.pirate = pirate;
 		this.kontor = kontor;
 		this.hafen = hafen;
 		this.werft = werft;
