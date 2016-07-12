@@ -1,13 +1,12 @@
-package kaufmann
-
-import lokalitaeten.*
-import geoobjekt.*
-import hafen.*
-import schiff.*
-import route.*
+package hanse.kontor2016.kaufmann;
 
 import java.util.LinkedList;
 import java.util.Scanner;
+
+import hanse.kontor2016.lokalitaeten.GeoObjekt;
+import hanse.kontor2016.lokalitaeten.Lokalitaeten;
+import hanse.kontor2016.lokalitaeten.Route;
+import hanse.kontor2016.schiff.Schiff;
 
 
 /**
@@ -15,6 +14,7 @@ import java.util.Scanner;
   * 
   * @author Zilch Daniel
   * @author Marx Armin
+  * @author Simon Bastian : hier gibts noch was zu tun
   */
   
 
@@ -34,9 +34,9 @@ public class Kaufmann
     
     public void macheZug ()
     {
-        LinkedList <GeoObjekte> hafenList = lokal.getHafen();
-        GeoObjekte chosenHafen = null;
-        GeoObjekte chosenRoute = null;
+        LinkedList <GeoObjekt> hafenList = lokal.getHafen();
+        GeoObjekt chosenHafen = null;
+        GeoObjekt chosenRoute = null;
         Schiff chosenSchiff = null;
         LinkedList <Schiff> eigeneSchiffeInHafen = new LinkedList<Schiff>();
         LinkedList <Route> hafenRouten = null;
@@ -66,7 +66,7 @@ public class Kaufmann
             {
                 System.out.println("Häfen:\n");
                 
-                for ( GeoObjekte hafen : hafenList )
+                for ( GeoObjekt hafen : hafenList )
                 {
                     System.out.println(hafen.getID() + " " + hafen.toString());
                 }
@@ -77,7 +77,7 @@ public class Kaufmann
                 
                 if ( !hafenWahl.equals("-1") )
                 {
-                    for ( GeoObjekte hafen : hafenList )
+                    for ( GeoObjekt hafen : hafenList )
                     {
                         if ( hafen.getID() == Integer.parseInt(hafenWahl) )
                         {
@@ -117,7 +117,7 @@ public class Kaufmann
                         
                         if ( !routeWahl.equals("-1") )
                         {
-                            for ( GeoObjekte route : hafenList )
+                            for ( GeoObjekt route : hafenList )
                             {
                                 if ( route.getID() == Integer.parseInt(routeWahl) )
                                 {
@@ -198,7 +198,7 @@ public class Kaufmann
     
     public boolean zahleBetragEin (double b) { return meinKonto.einzahlen(b); }
     
-    public double zahleBetragAus (double b) { return meinKonto.auszahlen(b); }
+    public boolean zahleBetragAus (double b) { return meinKonto.auszahlen(b); }
     
 }
 

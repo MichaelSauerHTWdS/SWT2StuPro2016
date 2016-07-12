@@ -1,4 +1,4 @@
-package kaufmann
+package hanse.kontor2016.kaufmann;
 
 
 /**
@@ -13,7 +13,7 @@ public class Konto
 {
     private double betrag;
     
-    public Konto
+    public Konto()
     {
         betrag = 0.0;
     }
