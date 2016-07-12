@@ -1,5 +1,9 @@
 package hanse.kontor2016.schiff;
-
+/**
+ * 
+ * @author sbastian
+ *
+ */
 public enum Schiffstyp {
 	SCHNIGGE, KOGGE, HOLK, KRAWEEL, KARACKE, LINIENSCHIFF;
 	public static Schiffstyp getUpgrade(Schiffstyp schiffstyp){

@@ -3,7 +3,11 @@ package hanse.kontor2016.schiff;
 import hanse.kontor2016.kontor.Lager;
 import hanse.kontor2016.lokalitaeten.GeoObjekt;
 import hanse.kontor2016.lokalitaeten.Route;
-
+/**
+ * 
+ * @author sbastian
+ *
+ */
 public class Schiff {
 	private String name;
 	private Schiffstyp typ;
