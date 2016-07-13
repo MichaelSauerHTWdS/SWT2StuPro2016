@@ -3,8 +3,8 @@ package hanse.kontor2016.kaufmann;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import hanse.kontor2016.SpielKontor;
 import hanse.kontor2016.lokalitaeten.GeoObjekt;
-import hanse.kontor2016.lokalitaeten.Lokalitaeten;
 import hanse.kontor2016.lokalitaeten.Route;
 import hanse.kontor2016.schiff.Schiff;
 
@@ -20,11 +20,11 @@ import hanse.kontor2016.schiff.Schiff;
 
 public class Kaufmann
 {
-    private Lokalitaeten lokal;
+    private SpielKontor lokal;
     private LinkedList<Schiff> eigeneSchiffe;
     private Konto meinKonto;
     
-    public Kaufmann (Lokalitaeten l)
+    public Kaufmann (SpielKontor l)
     {
         lokal = l;
         eigeneSchiffe = new LinkedList<Schiff>();
